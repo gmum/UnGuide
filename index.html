@@ -4,21 +4,25 @@
 <head>
   <meta charset="utf-8">
 
-  <meta name="description" content="UnGuide: Learning to Forget with LoRA-Guided Diffusion Models – efficient machine unlearning via LoRA modules for controlled concept erasure in diffusion models.">
+  <meta name="description"
+    content="UnGuide: Learning to Forget with LoRA-Guided Diffusion Models – efficient machine unlearning via LoRA modules for controlled concept erasure in diffusion models.">
 
   <meta property="og:title" content="UnGuide: Learning to Forget with LoRA-Guided Diffusion Models">
-  <meta property="og:description" content="UnGuide presents a method for machine unlearning in text-to-image diffusion models by fine-tuning LoRA modules to remove specific concepts while preserving generation quality.">
+  <meta property="og:description"
+    content="UnGuide presents a method for machine unlearning in text-to-image diffusion models by fine-tuning LoRA modules to remove specific concepts while preserving generation quality.">
   <meta property="og:url" content="https://arxiv.org/abs/2508.05755">
   <meta property="og:image" content="static/images/teaser.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
   <meta name="twitter:title" content="UnGuide: Learning to Forget with LoRA-Guided Diffusion Models">
-  <meta name="twitter:description" content="Efficient machine unlearning for diffusion models with LoRA-guided fine-tuning—remove unwanted concepts while maintaining expressive generation.">
+  <meta name="twitter:description"
+    content="Efficient machine unlearning for diffusion models with LoRA-guided fine-tuning—remove unwanted concepts while maintaining expressive generation.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="static/images/teaser.jpg">
 
-  <meta name="keywords" content="machine unlearning, LoRA, diffusion models, text-to-image, concept erasure, UnGuide, generative AI">
+  <meta name="keywords"
+    content="machine unlearning, LoRA, diffusion models, text-to-image, concept erasure, UnGuide, generative AI">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -66,7 +70,6 @@
     hr.solid {
       border-top: 2px solid #bbb;
     }
-
   </style>
 
 </head>
@@ -79,35 +82,43 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title"><span class="unguide">UnGuide</span>: Learning to Forget with LoRA-Guided Diffusion Models</h1>
+            <h1 class="title is-1 publication-title"><span class="unguide">UnGuide</span>: Learning to Forget with
+              LoRA-Guided Diffusion Models</h1>
             <div class="is-size-4 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <a href="https://orcid.org/0009-0008-1583-4493" target="_blank">Agnieszka Polowczyk</a><sup>1, *</sup>,</span>
-              
-                <span class="author-block">
-                <a href="https://orcid.org/0009-0001-3110-8255" target="_blank">Alicja Polowczyk</a><sup>1, *</sup>,</span>
-              
-                <span class="author-block">
+                <a href="https://orcid.org/0009-0008-1583-4493" target="_blank">Agnieszka Polowczyk</a><sup>1,
+                  *</sup>,</span>
+
+              <span class="author-block">
+                <a href="https://orcid.org/0009-0001-3110-8255" target="_blank">Alicja Polowczyk</a><sup>1,
+                  *</sup>,</span>
+
+              <span class="author-block">
                 <a href="https://www.linkedin.com/in/dawid-malarz/" target="_blank">Dawid Malarz</a><sup>2</sup>,</span>
-              
-                <span class="author-block">
-                <a href="https://www.linkedin.com/in/arturkasymov/" target="_blank">Artur Kasymov</a><sup>2</sup>,</span>
 
-                <span class="author-block">
-                <a href="https://scholar.google.com/citations?user=HP_2sDgAAAAJ" target="_blank">Marcin Mazur</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://www.linkedin.com/in/arturkasymov/" target="_blank">Artur
+                  Kasymov</a><sup>2</sup>,</span>
 
-                <span class="author-block">
-                <a href="https://scholar.google.com/citations?user=zSKYziUAAAAJ" target="_blank">Jacek Tabor</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=HP_2sDgAAAAJ" target="_blank">Marcin
+                  Mazur</a><sup>2</sup>,</span>
 
-                <span class="author-block">
-                <a href="https://scholar.google.com/citations?hl=en&user=0kp0MbgAAAAJ" target="_blank">Przemysław Spurek</a><sup>2, 3</sup></span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=zSKYziUAAAAJ" target="_blank">Jacek
+                  Tabor</a><sup>2</sup>,</span>
+
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=en&user=0kp0MbgAAAAJ" target="_blank">Przemysław
+                  Spurek</a><sup>2, 3</sup></span>
 
             </div>
             <div class="is-size-4 publication-authors">
               <span class="eql-cntrb" style="color:black"><small><br><sup>*</sup>Indicates Equal
                   Contribution</small></span>
-              <span class="eql-cntrb" style="color:black"><small><br><sup>1</sup>Silesian University of Technology</small></span>
+              <span class="eql-cntrb" style="color:black"><small><br><sup>1</sup>Silesian University of
+                  Technology</small></span>
               <span class="eql-cntrb" style="color:black"><small><sup>2</sup>Jagiellonian University</small></span>
               <span class="eql-cntrb" style="color:black"><small><sup>3</sup>IDEAS Research Institute</small></span>
             </div>
@@ -155,14 +166,25 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p style="font-size:18px;">
-              Recent advances in large-scale text-to-image diffusion models have heightened concerns about their potential misuse,
-especially in generating harmful or misleading content. This underscores the urgent need for effective machine unlearning, i.e., removing specific knowledge or concepts from pretrained
-models without compromising overall performance. One possible approach is <b>Low-Rank Adaptation (LoRA)</b>, which offers an efficient means to fine-tune models for targeted unlearning. However, LoRA often inadvertently alters unrelated
-content, leading to diminished image fidelity and realism. To address this limitation, we introduce <span class="unguide"><b>UnGuide</b></span>—a novel approach which incorporates <span class="unguide"><b>UnGuidance</b></span>, a dynamic inference
-mechanism that leverages <b>Classifier-Free Guidance (CFG)</b> to exert precise control over the unlearning process. <span class="unguide"><b>UnGuide</b></span> modulates the guidance scale based on the stability of a few
-first steps of denoising processes, enabling selective unlearning by LoRA adapter. For prompts containing the erased concept, the LoRA module predominates and is counterbalanced
-by the base model; for unrelated prompts, the base model governs generation, preserving content fidelity. Empirical results demonstrate that <span class="unguide"><b>UnGuide</b></span> achieves controlled concept
-removal and retains the expressive power of diffusion models, <b>outperforming</b> existing LoRA-based methods in both object erasure and explicit content removal tasks.
+              Recent advances in large-scale text-to-image diffusion models have heightened concerns about their
+              potential misuse,
+              especially in generating harmful or misleading content. This underscores the urgent need for effective
+              machine unlearning, i.e., removing specific knowledge or concepts from pretrained
+              models without compromising overall performance. One possible approach is <b>Low-Rank Adaptation
+                (LoRA)</b>, which offers an efficient means to fine-tune models for targeted unlearning. However, LoRA
+              often inadvertently alters unrelated
+              content, leading to diminished image fidelity and realism. To address this limitation, we introduce <span
+                class="unguide"><b>UnGuide</b></span>—a novel approach which incorporates <span
+                class="unguide"><b>UnGuidance</b></span>, a dynamic inference
+              mechanism that leverages <b>Classifier-Free Guidance (CFG)</b> to exert precise control over the
+              unlearning process. <span class="unguide"><b>UnGuide</b></span> modulates the guidance scale based on the
+              stability of a few
+              first steps of denoising processes, enabling selective unlearning by LoRA adapter. For prompts containing
+              the erased concept, the LoRA module predominates and is counterbalanced
+              by the base model; for unrelated prompts, the base model governs generation, preserving content fidelity.
+              Empirical results demonstrate that <span class="unguide"><b>UnGuide</b></span> achieves controlled concept
+              removal and retains the expressive power of diffusion models, <b>outperforming</b> existing LoRA-based
+              methods in both object erasure and explicit content removal tasks.
               <br>
             </p>
           </div>
@@ -180,12 +202,17 @@ removal and retains the expressive power of diffusion models, <b>outperforming</
           <h2 class="title is-3">Method</h2>
           <div class="content has-text-justified">
             <p style=" font-size:18px;">
-             Overview of the adaptive guidance mechanism in <span class="unguide"><b>UnGuide</b></span>. We quantify the LoRA adapter’s influence relative
-to the base model by comparing the norms of predicted noise for a target prompt c and a neutral prompt c<sub>0</sub>. After a short
-initial denoising phase (typically <b>t = 10 steps</b>), we perform several additional denoising steps (<b>N = 10</b>) to approximate the
-output distribution. The difference in norms between the base and LoRA model predictions informs adaptive adjustment of the
-guidance scale: for <b>w ≤ −1</b>, we prioritize the LoRA model to ensure concept erasure (e.g., removing the cat), while for <b>w ≥ 1</b>,
-we lean on the base model to preserve the original concept in generation.
+              Overview of the adaptive guidance mechanism in <span class="unguide"><b>UnGuide</b></span>. We quantify
+              the LoRA adapter’s influence relative
+              to the base model by comparing the norms of predicted noise for a target prompt c and a neutral prompt
+              c<sub>0</sub>. After a short
+              initial denoising phase (typically <b>t = 10 steps</b>), we perform several additional denoising steps
+              (<b>N = 10</b>) to approximate the
+              output distribution. The difference in norms between the base and LoRA model predictions informs adaptive
+              adjustment of the
+              guidance scale: for <b>w ≤ −1</b>, we prioritize the LoRA model to ensure concept erasure (e.g., removing
+              the cat), while for <b>w ≥ 1</b>,
+              we lean on the base model to preserve the original concept in generation.
             </p>
             <img src="static/images/figure3.jpg" alt="figure3" />
           </div>
@@ -198,54 +225,64 @@ we lean on the base model to preserve the original concept in generation.
 
   <!-- Downstream Tasks -->
   <section class="section hero is-light">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-sixths">
-          <h2 class="title is-3">Experimental Results</h2>
+    <div class="hero-body">
 
-          <h2 class="title is-4">1. Object Erasure</h2>
-          <div class="content has-text-justified">
-            <p style="font-size:18px;">
-              Qualitative comparison on dog erasure. Images in the same column are generated using the same random seed.
-            </p>
-            <img src="static/images/figure4.jpg" alt="figure4" />
-          </div>
-          
+      <div class="container">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-sixths">
+            <div class="content has-text-justified">
+              <h2 class="title is-3">Experimental Results</h2>
 
-          <h2 class="title is-4"> 2. NSFW </h2>
-          <div class="content has-text-justified">
-            <p style="font-size:18px;">
-              Qualitative comparison of explicit concept removal with other methods. Images in the same column are generated using the same random seed.
-            </p>
-            <div class="container is-max-desktop">
+              <h2 class="title is-4">1. Object Erasure</h2>
+
+              <p style="font-size:18px;">
+                Qualitative comparison on dog erasure. Images in the same column are generated using the same random
+                seed.
+              </p>
+              <img src="static/images/figure4.jpg" alt="figure4" />
+
+
+              <h2 class="title is-4"> 2. NSFW </h2>
+              <p style="font-size:18px;">
+                Qualitative comparison of explicit concept removal with other methods. Images in the same column are
+                generated using the same random seed.
+              </p>
+              <div class="container">
                 <div id="results-carousel" class="carousel results-carousel" style="margin-top:-25px">
                   <div class="item">
-                    
-                    <img src="static/images/nsfw_man.png" alt="MY ALT TEXT" />
+
+                    <img src="static/images/nsfw_man.png" />
                   </div>
 
                   <div class="item">
-                    
-                    <img src="static/images/nsfw_woman.png" alt="MY ALT TEXT" />
+
+                    <img src="static/images/nsfw_woman.png" />
                   </div>
+                </div>
+
               </div>
 
-            </div>
-          </div>
 
-          <h2 class="title is-4" style="margin-top:-20px;"> <br> 3. Artistic Styles
-          </h2>
-          <div class="content has-text-justified">
-            <p style="margin-top:5px; margin-bottom: 10px; font-size: 18px;">
-              Qualitative visualization of unlearning the <b>dog</b> and the style of <b>Vincent van Gogh</b>. First, only the dog was
-unlearned; then, only the style; and finally, both adapters were connected. Images in the same column are generated using the
-same random seed.
-            </p>
-            <img src="static/images/van_gogh.png" alt="styles" />
+              <h2 class="title is-4" style="margin-top:-20px;"> <br> 3. Artistic Styles
+              </h2>
+              <div class="content has-text-justified">
+                <p style="margin-top:5px; margin-bottom: 10px; font-size: 18px;">
+                  Qualitative visualization of unlearning the <b>dog</b> and the style of <b>Vincent van Gogh</b>.
+                  First,
+                  only the dog was
+                  unlearned; then, only the style; and finally, both adapters were connected. Images in the same column
+                  are
+                  generated using the
+                  same random seed.
+                </p>
+                <img src="static/images/van_gogh.png" alt="styles" />
+              </div>
+            </div>
           </div>
 
         </div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -258,8 +295,9 @@ same random seed.
           <div class="content has-text-justified">
             <p style=" font-size:18px;">
               The primary metrics for evaluating object unlearning quality are Acc<sub>e</sub>,
-Acc<sub>s</sub>, and Acc<sub>g</sub>. A key composite metric, H<sub>o</sub>, quantifies how effectively a concept is unlearned while preserving the integrity
-of the remaining classes. All values reported in the table are expressed as percentages.
+              Acc<sub>s</sub>, and Acc<sub>g</sub>. A key composite metric, H<sub>o</sub>, quantifies how effectively a
+              concept is unlearned while preserving the integrity
+              of the remaining classes. All values reported in the table are expressed as percentages.
             </p>
             <img src="static/images/table1.jpg" alt="table1" />
           </div>
@@ -283,7 +321,7 @@ of the remaining classes. All values reported in the table are expressed as perc
       url={https://arxiv.org/abs/2508.05755}, 
 }</code></pre>
     </div>
-</section>
+  </section>
   <!--End BibTex citation -->
 
   <footer class="footer">
