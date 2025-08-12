@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <meta name="description" content="UnGuide: Learning to Forget with LoRA-Guided Diffusion Models – efficient machine unlearning via LoRA modules for controlled concept erasure in diffusion models.">
+
+  <meta property="og:title" content="UnGuide: Learning to Forget with LoRA-Guided Diffusion Models">
+  <meta property="og:description" content="UnGuide presents a method for machine unlearning in text-to-image diffusion models by fine-tuning LoRA modules to remove specific concepts while preserving generation quality.">
+  <meta property="og:url" content="https://arxiv.org/abs/2508.05755">
+  <meta property="og:image" content="static/images/teaser.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:title" content="UnGuide: Learning to Forget with LoRA-Guided Diffusion Models">
+  <meta name="twitter:description" content="Efficient machine unlearning for diffusion models with LoRA-guided fine-tuning—remove unwanted concepts while maintaining expressive generation.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="static/images/teaser.jpg">
+
+  <meta name="keywords" content="machine unlearning, LoRA, diffusion models, text-to-image, concept erasure, UnGuide, generative AI">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <title>UnGuide</title>
+  <link rel="icon" type="image/x-icon" href="static/images/dog_fav.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+    </script>
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
+
+  <style>
+    .unguide {
+      color: #FF9A2D;
+    }
+
+    hr.solid {
+      border-top: 2px solid #bbb;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title"><span class="unguide">UnGuide</span>: Learning to Forget with LoRA-Guided Diffusion Models</h1>
+            <div class="is-size-4 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://orcid.org/0009-0008-1583-4493" target="_blank">Agnieszka Polowczyk</a><sup>1, *</sup>,</span>
+              
+                <span class="author-block">
+                <a href="https://orcid.org/0009-0001-3110-8255" target="_blank">Alicja Polowczyk</a><sup>1, *</sup>,</span>
+              
+                <span class="author-block">
+                <a href="https://www.linkedin.com/in/dawid-malarz/" target="_blank">Dawid Malarz</a><sup>2</sup>,</span>
+              
+                <span class="author-block">
+                <a href="https://www.linkedin.com/in/arturkasymov/" target="_blank">Artur Kasymov</a><sup>2</sup>,</span>
+
+                <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=HP_2sDgAAAAJ" target="_blank">Marcin Mazur</a><sup>2</sup>,</span>
+
+                <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=zSKYziUAAAAJ" target="_blank">Jacek Tabor</a><sup>2</sup>,</span>
+
+                <span class="author-block">
+                <a href="https://scholar.google.com/citations?hl=en&user=0kp0MbgAAAAJ" target="_blank">Przemysław Spurek</a><sup>2, 3</sup></span>
+
+            </div>
+            <div class="is-size-4 publication-authors">
+              <span class="eql-cntrb" style="color:black"><small><br><sup>*</sup>Indicates Equal
+                  Contribution</small></span>
+              <span class="eql-cntrb" style="color:black"><small><br><sup>1</sup>Silesian University of Technology</small></span>
+              <span class="eql-cntrb" style="color:black"><small><sup>2</sup>Jagiellonian University</small></span>
+              <span class="eql-cntrb" style="color:black"><small><sup>3</sup>IDEAS Research Institute</small></span>
+            </div>
+
+            <span class="link-block">
+              <a href="https://arxiv.org/abs/2508.05755" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                </ARXIV>
+                <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+                </span>
+                <span>arXiv</span>
+              </a>
+            </span>
+
+            <span class="link-block">
+              <a href="https://github.com/gmum/UnGuide" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code</span>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Teaser Carousel-->
+  <section class="hero teaser">
+    <div class="hero-body">
+      <div class="container">
+        <img src="static/images/teaser.jpg" alt="teaser" />
+  </section>
+
+
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-sixths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p style="font-size:18px;">
+              Recent advances in large-scale text-to-image diffusion models have heightened concerns about their potential misuse,
+especially in generating harmful or misleading content. This underscores the urgent need for effective machine unlearning, i.e., removing specific knowledge or concepts from pretrained
+models without compromising overall performance. One possible approach is <b>Low-Rank Adaptation (LoRA)</b>, which offers an efficient means to fine-tune models for targeted unlearning. However, LoRA often inadvertently alters unrelated
+content, leading to diminished image fidelity and realism. To address this limitation, we introduce <span class="unguide"><b>UnGuide</b></span>—a novel approach which incorporates <span class="unguide"><b>UnGuidance</b></span>, a dynamic inference
+mechanism that leverages <b>Classifier-Free Guidance (CFG)</b> to exert precise control over the unlearning process. <span class="unguide"><b>UnGuide</b></span> modulates the guidance scale based on the stability of a few
+first steps of denoising processes, enabling selective unlearning by LoRA adapter. For prompts containing the erased concept, the LoRA module predominates and is counterbalanced
+by the base model; for unrelated prompts, the base model governs generation, preserving content fidelity. Empirical results demonstrate that <span class="unguide"><b>UnGuide</b></span> achieves controlled concept
+removal and retains the expressive power of diffusion models, <b>outperforming</b> existing LoRA-based methods in both object erasure and explicit content removal tasks.
+              <br>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End paper abstract -->
+
+  <!-- Method -->
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-sixths">
+          <h2 class="title is-3">Method</h2>
+          <div class="content has-text-justified">
+            <p style=" font-size:18px;">
+             Overview of the adaptive guidance mechanism in <span class="unguide"><b>UnGuide</b></span>. We quantify the LoRA adapter’s influence relative
+to the base model by comparing the norms of predicted noise for a target prompt c and a neutral prompt c<sub>0</sub>. After a short
+initial denoising phase (typically <b>t = 10 steps</b>), we perform several additional denoising steps (<b>N = 10</b>) to approximate the
+output distribution. The difference in norms between the base and LoRA model predictions informs adaptive adjustment of the
+guidance scale: for <b>w ≤ −1</b>, we prioritize the LoRA model to ensure concept erasure (e.g., removing the cat), while for <b>w ≥ 1</b>,
+we lean on the base model to preserve the original concept in generation.
+            </p>
+            <img src="static/images/figure3.png" alt="figure3" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Method -->
+
+
+  <!-- Downstream Tasks -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-sixths">
+          <h2 class="title is-3">Experimental Results</h2>
+
+          <h2 class="title is-4">1. Object Erasure</h2>
+          <div class="content has-text-justified">
+            <p style="font-size:18px;">
+              Qualitative comparison on dog erasure. Images in the same column are generated using the same random seed.
+            </p>
+            <img src="static/images/figure4.png" alt="figure4" />
+          </div>
+          
+
+          <h2 class="title is-4"> 2. NSFW </h2>
+          <div class="content has-text-justified">
+            <p style="font-size:18px;">
+              Qualitative comparison of explicit concept removal with other methods. Images in the same column are generated using the same random seed.
+            </p>
+            <div class="container is-max-desktop">
+                <div id="results-carousel" class="carousel results-carousel" style="margin-top:-25px">
+                  <div class="item">
+                    
+                    <img src="static/images/nsfw_man.png" alt="MY ALT TEXT" />
+                  </div>
+
+                  <div class="item">
+                    
+                    <img src="static/images/nsfw_woman.png" alt="MY ALT TEXT" />
+                  </div>
+              </div>
+
+            </div>
+          </div>
+
+          <h2 class="title is-4" style="margin-top:-20px;"> <br> 3. Artistic Styles
+          </h2>
+          <div class="content has-text-justified">
+            <p style="margin-top:5px; margin-bottom: 10px; font-size: 18px;">
+              Qualitative visualization of unlearning the <b>dog</b> and the style of <b>Vincent van Gogh</b>. First, only the dog was
+unlearned; then, only the style; and finally, both adapters were connected. Images in the same column are generated using the
+same random seed.
+            </p>
+            <img src="static/images/van_gogh.png" alt="styles" />
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method -->
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-sixths">
+          <h2 class="title is-3">Evaluation of erasing the CIFAR-10 classes</h2>
+          <div class="content has-text-justified">
+            <p style=" font-size:18px;">
+              The primary metrics for evaluating object unlearning quality are Acc<sub>e</sub>,
+Acc<sub>s</sub>, and Acc<sub>g</sub>. A key composite metric, H<sub>o</sub>, quantifies how effectively a concept is unlearned while preserving the integrity
+of the remaining classes. All values reported in the table are expressed as percentages.
+            </p>
+            <img src="static/images/table1.png" alt="table1" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Method -->
+
+  <!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@misc{polowczyk2025unguidelearningforgetloraguided,
+      title={UnGuide: Learning to Forget with LoRA-Guided Diffusion Models}, 
+      author={Agnieszka Polowczyk and Alicja Polowczyk and Dawid Malarz and Artur Kasymov and Marcin Mazur and Jacek Tabor and Przemysław Spurek},
+      year={2025},
+      eprint={2508.05755},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2508.05755}, 
+}</code></pre>
+    </div>
+</section>
+  <!--End BibTex citation -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the of this website, we just ask that you link back to this page in the footer.
+              <br> This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
